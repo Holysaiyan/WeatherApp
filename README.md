@@ -20,9 +20,11 @@ Usage:
 -------------------------------------------------------------------------------
 BEFORE YOU CAN USE THE APP
 
-You will need to create a .env file (no extension)
+You will need to create a .env file (no extension). It has to be in the same directory as the program
+<img width="434" alt="Screenshot 2023-06-28 114657" src="https://github.com/Holysaiyan/WeatherApp/assets/53127211/495d8290-a847-4dda-ac1e-63aba4db8028">
 
 and write this code
+<img width="308" alt="3" src="https://github.com/Holysaiyan/WeatherApp/assets/53127211/b99473fb-1618-4598-a236-e71c5beb48f4">
 
 weather_api_key=YOUR_API_KEY_GOES_HERE
 
