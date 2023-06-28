@@ -1,4 +1,4 @@
-"""
+
 WeatherApp
 
 This module provides the WeatherApp class, which is a Python command-line application
@@ -56,4 +56,3 @@ forecast = weather_app.forecast_weather("Paris", 5)
 print(forecast)
 
 
-"""
