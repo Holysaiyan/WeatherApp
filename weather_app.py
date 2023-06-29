@@ -6,6 +6,7 @@ weather forecast data using the WeatherAPI.
 import os
 import requests
 from dotenv import load_dotenv
+from datetime import datetime
 
 
 class WeatherApp:
@@ -30,6 +31,26 @@ class WeatherApp:
         Load the environment variables from the .env file.
         """
         load_dotenv()
+
+    def format_date(self, date):
+        """
+        This function formats the date from yyyy-mm-dd to dd-mm-yyyy
+        or yyyy-mm-dd HH:MM to dd-mm-yyyy HH:MM
+        :param date: The date (str) in yyyy-mm-dd or yyyy-mm-dd HH:MM format
+        :return: The formatted date in dd-mm-yyyy or dd-mm-yyyy HH:MM format
+        """
+        if len(date) == 10:
+            old_date_format = datetime.strptime(date, "%Y-%m-%d")
+            formatted_date = old_date_format.strftime("%d-%m-%Y")
+            return formatted_date
+        elif len(date) == 16:
+            old_date_format = datetime.strptime(date, "%Y-%m-%d %H:%M")
+            formatted_date = old_date_format.strftime("%d-%m-%Y %H:%M")
+            return formatted_date
+        else:
+            return "Invalid date"
+
+
 
     def get_api(self):
         """
@@ -66,7 +87,7 @@ class WeatherApp:
                      f"in the {country_region} region.\nThe " \
                      f"current temperature is {current_temp}\u00b0C, " \
                      f"the weather condition is {current_weather_condition}." \
-                     f" Weather information was last updated {current_time}"
+                     f" Weather information was last updated {self.format_date(current_time)}"
 
             return result
         return "Api not found"
@@ -109,12 +130,12 @@ class WeatherApp:
                                       'min_temp': min_temp_c, 'condition':
                                      condition})
                 if unit_of_measurement == 1:
-                    result += f"On {date}, the weather forecast for {location_name} in" \
+                    result += f"On {self.format_date(date)}, the weather forecast for {location_name} in" \
                               f" {location_country} predicts {condition}," \
                               f" the highest temperature will be {max_temp_c}\u00b0C," \
                               f" and the lowest will be {min_temp_c}\u00b0C\n\n"
                 elif unit_of_measurement == 2:
-                    result += f"On {date}, the weather forecast for {location_name} in" \
+                    result += f"On {self.format_date(date)}, the weather forecast for {location_name} in" \
                               f" {location_country} predicts {condition}," \
                               f" the highest temperature will be {max_temp_f}\u00b0F," \
                               f" and the lowest will be {min_temp_f}\u00b0F\n\n"
